@@ -1,0 +1,64 @@
+<!-- extends base.html -->
+{% extends "base.html" %}
+
+<!--page title-->
+{% block title %}Home{% endblock title %}
+
+<!--active class to show the currently active page-->
+{%block home%}active{%endblock home%}
+
+<!--shows login and register options for anonymous users-->
+<!--shows welcome msg and logout option for logged in users-->
+{%block userActivity%} 
+    {% if authenticated %}
+        <span class="text-white me-2">Welcome, {{fullname}} |</span>
+        <span class="nav-item">
+            <a href="./logoutuser" class="nav-link text-white ps-1">
+                <span class="fas fa-sign-out-alt"></span> Logout
+            </a>
+        </span>
+    {% else %}
+        <span class="nav-item">
+            <a href="./loginuser" class="nav-link text-white ps-1">
+                <span class="fas fa-sign-in-alt"></span> Login
+            </a>
+        </span>
+        <span class="nav-item">
+            <a href="./registration" class="nav-link text-white ps-1">
+                <span class="fas fa-user"></span> Register
+            </a>
+        </span>
+    {%endif%}
+{%endblock userActivity%}
+
+<!--body block containing all the blogs of every registered user-->
+{% block body %}
+    <div class="container mt-4" >
+        {% if  blogs%}
+            {% for blog in  blogs %}
+                <div class="row justify-content-center mb-3">
+                <div class="col col-md-8 border rounded-2 mx-2">
+                    <div class="row">
+                        <h4 class="">
+                            {{blog.title}}
+                        </h4>
+                        <small>by @{{blog.username}}</small>
+                        <small> Date published: {{blog.timestamp}}</small>
+                    </div>
+                    <hr class="my-1">
+                    <div class="row">
+                        <div class="col mx-4">
+                            <p>{{blog.body}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="text-center" style="color:#ddd">
+                <span class="fas fa-folder-open fa-5x"></span>
+                <h2>Nothing to show.</h2>
+            </div>
+        {% endif %}
+    </div>
+{%endblock body%}
