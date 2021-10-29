@@ -131,5 +131,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # added manually
 
 STATICFILES_DIRS = [
-    "D:/Django/myproject/myproject/static"
+    os.path.join(BASE_DIR,"static")
 ]
